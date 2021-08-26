@@ -5,7 +5,20 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems:'center',
         justifyContent:'center'
-    }
+    },
+    shopContainer:{ flex: 1, 
+        flexDirection: "row", 
+        flexWrap: "wrap",
+        alignItems:'flex-start',
+        justifyContent:'center' 
+},
+    shopItem:{
+        margin: 10,
+        width: '30%',
+        borderWidth:3,
+        borderRadius:15
+      }
+
 })
 
 export default styles

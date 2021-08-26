@@ -13,7 +13,7 @@ export default function Cart({ navigation }: HomeProps): ReactElement {
     <View style={style.container}>
       <Text>Cart</Text>
       <Button
-        title="Cart"
+        title="Home"
         onPress={() => {
           navigation.navigate("Home");
         }}
