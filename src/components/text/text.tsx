@@ -30,7 +30,7 @@ export default function Text({
   }
 
   return (
-    <NativeText {...props} style={[{ fontFamily, fontSize: 25 }, style]}>
+    <NativeText {...props} style={[{ fontFamily, fontSize: 23 }, style]}>
       {children}
     </NativeText>
   );
