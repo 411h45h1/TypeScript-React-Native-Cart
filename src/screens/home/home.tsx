@@ -6,7 +6,7 @@ import { StackNavigatorPrams } from "../navigator";
 import { Text } from "../../components";
 import useSounds from "../../components/tools/useSound";
 import styles from "./home.styles";
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 
 type HomeProps = {
   navigation: StackNavigationProp<StackNavigatorPrams, "Home">;
@@ -25,15 +25,35 @@ export type CartItemType = {
 export default function Home({ navigation }: HomeProps): ReactElement {
   const playSound = useSounds();
   const [loading, setLoading] = useState(false);
+  const [inventory, setInventory] = useState([] as CartItemType[]);
   const [cartItems, setCartItems] = useState([] as CartItemType[]);
+
   const [showDesc, setShowDesc] = useState(0);
 
+  const handleAddToCart = (clickedItem: CartItemType) => {
+    setCartItems((prev) => {
+      // 1. Is the item already added in the cart?
+      const isItemInCart = prev.find((item) => item.id === clickedItem.id);
+
+      if (isItemInCart) {
+        return prev.map((item) =>
+          item.id === clickedItem.id
+            ? { ...item, amount: item.amount + 1 }
+            : item
+        );
+      }
+      // First time the item is added
+      return [...prev, { ...clickedItem, amount: 1 }];
+    });
+  };
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
+    fetch("https://fakestoreapi.com/products/category/electronics")
       .then((res) => res.json())
-      .then((json) => setCartItems(json));
+      .then((json) => setInventory(json));
   }, []);
-  console.log(cartItems);
+
+  const getTotalItems = (items: CartItemType[]) =>
+    items.reduce((ack: number, item) => ack + item.amount, 0);
 
   return (
     <View style={style.container}>
@@ -48,11 +68,11 @@ export default function Home({ navigation }: HomeProps): ReactElement {
       <Button
         title={"Cart"}
         onPress={() => {
-          navigation.navigate("Cart");
+          navigation.navigate("Cart", { cartData: cartItems });
         }}
       />
       <View style={styles.shopContainer}>
-        {cartItems.map((i, k) => {
+        {inventory.map((i, k) => {
           return (
             <View style={styles.shopItem} key={k}>
               <Text title style={{ margin: 5 }}>
@@ -64,8 +84,8 @@ export default function Home({ navigation }: HomeProps): ReactElement {
                   source={{ uri: i.image }}
                   style={{
                     flex: 1,
-                    height: 300,
-                    width: 300,
+                    height: 150,
+                    width: 150,
                     resizeMode: "contain",
                   }}
                 />
@@ -96,6 +116,14 @@ export default function Home({ navigation }: HomeProps): ReactElement {
                     name="book"
                     size={24}
                     color={showDesc === i.id ? "tomato" : "white"}
+                  />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => handleAddToCart(i)}>
+                  <MaterialCommunityIcons
+                    name="cart-plus"
+                    size={24}
+                    color="white"
                   />
                 </TouchableOpacity>
 

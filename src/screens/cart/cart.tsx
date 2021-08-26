@@ -6,9 +6,11 @@ import { StackNavigatorPrams } from "../navigator";
 
 type HomeProps = {
   navigation: StackNavigationProp<StackNavigatorPrams, "Cart">;
+  route: StackNavigationProp<StackNavigatorPrams, "Cart">;
 };
 
-export default function Cart({ navigation }: HomeProps): ReactElement {
+export default function Cart({ navigation, route }: HomeProps): ReactElement {
+  console.log(route.params);
   return (
     <View style={style.container}>
       <Text>Cart</Text>

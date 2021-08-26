@@ -2,10 +2,13 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Home, Cart } from "./index";
+import { CartItemType } from "./home/home";
 
 export type StackNavigatorPrams = {
   Home: undefined;
-  Cart: undefined;
+  Cart: {
+    cartData: CartItemType[];
+  };
 };
 
 const Stack = createStackNavigator<StackNavigatorPrams>();

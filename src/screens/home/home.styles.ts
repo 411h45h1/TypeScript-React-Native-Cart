@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { isLargeScreen, normalize } from "../../components/tools/responsive";
 
 const styles = StyleSheet.create({
     container: {
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
 },
     shopItem:{
         margin: 10,
-        width: '30%',
+        width: '30%' ,
         borderWidth:3,
         borderRadius:15,
         overflow:'hidden'
