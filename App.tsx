@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import "react-native-gesture-handler";
 import { Splash, Text } from "./src/components";
