@@ -5,6 +5,10 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems:'center',
         justifyContent:'center'
+    },
+    cartItem:{
+       overflow:'hidden',
+        padding:5
     }
 })
 
