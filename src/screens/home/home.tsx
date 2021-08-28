@@ -57,20 +57,33 @@ export default function Home({ navigation }: HomeProps): ReactElement {
 
   return (
     <View style={style.container}>
-      <Text
-        title
-        bold
-        onPress={() => playSound("pop")}
-        style={{ fontSize: 35 }}
-      >
-        TypeScript & React Native Cart
-      </Text>
-      <Button
-        title={"Cart"}
-        onPress={() => {
-          navigation.navigate("Cart", { cartData: cartItems });
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "100%",
+          paddingHorizontal: 50,
         }}
-      />
+      >
+        <Text title bold style={{ fontSize: 35, color: "#423E37" }}>
+          TypeScript & React Native Cart
+        </Text>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "#423E37",
+            padding: 5,
+            borderRadius: 5,
+          }}
+          onPress={() => {
+            navigation.navigate("Cart", { cartData: cartItems });
+          }}
+        >
+          <Text title style={{ color: "white" }}>
+            Cart
+          </Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.shopContainer}>
         {inventory.map((i, k) => {
           return (
@@ -119,12 +132,24 @@ export default function Home({ navigation }: HomeProps): ReactElement {
                   />
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => handleAddToCart(i)}>
-                  <MaterialCommunityIcons
-                    name="cart-plus"
-                    size={24}
-                    color="white"
-                  />
+                <TouchableOpacity
+                  onPress={() => handleAddToCart(i)}
+                  style={{
+                    backgroundColor: "#7EB47E",
+                    padding: 5,
+                    borderRadius: 5,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Text
+                    title
+                    style={{
+                      fontSize: 15,
+                    }}
+                  >
+                    Add to Cart
+                  </Text>
                 </TouchableOpacity>
 
                 <Text title style={{ color: "white" }}>
